@@ -31,7 +31,7 @@ dataFrame = pd.DataFrame(dict, index  = range(12))
 root = 'F1'
 dataFrame.to_csv(root + '/' + 'TeamCodes.csv')
 
-#creating a csv of teams and sponsors
+#creating a csv of teams and sponsors, need work
 sponsors = {}
 for team in dict['name']:
     sponsors[team] = []
@@ -42,6 +42,8 @@ sponsor_page = requests.get(url2)
 soup2 = BeautifulSoup(sponsor_page.content, 'html.parser')
 
 for team in dict['team_code']:
-    soup2.find_all(id = team)
-    print(len(soup2))
+    teams = soup2.find_all(id = team)
+    for tags in teams:
+        if
+
 #new_dataframe = dataFrame.filter(['name'])
