@@ -8,6 +8,12 @@ sponsor_page = requests.get(url2)
 
 soup2 = BeautifulSoup(sponsor_page.content, 'html.parser')
 
+team = soup2.find(id = 'Red_Bull_Racing')
 
-for siblings in soup2.find(id = 'Red_Bull_Racing').next_siblings:
-    if siblings
+header = team.parent
+
+for sibling in header.next_siblings:
+    if sibling.name == 'table':
+        soup3 = sibling.contents
+
+soup3.find('a', )
