@@ -8,12 +8,12 @@ sponsor_page = requests.get(url2)
 
 soup2 = BeautifulSoup(sponsor_page.content, 'html.parser')
 
-team = soup2.find(id = 'Red_Bull_Racing')
+team = soup2.find(id = 'Alfa_Romeo')
 
 header = team.parent
 
-for sibling in header.next_siblings:
-    if sibling.name == 'table':
-        soup3 = sibling.contents
+table = header.find_next_sibling('table')
 
-soup3.find('a', )
+df = pd.read_html(str(table))
+df = pd.concat(df)
+df.to_csv(r'C:\Users\17735\Desktop\F1 Python\F1\sponsor.csv', index = False)
