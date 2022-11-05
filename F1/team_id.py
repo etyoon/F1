@@ -32,4 +32,4 @@ dict["team_code"] = constructors
 
 dataFrame = pd.DataFrame(dict, index  = range(12))
 
-dataFrame.to_csv(r'C:\Users\17735\Desktop\F1 Python\F1\TeamCodes.csv')
+print(dataFrame.head)
