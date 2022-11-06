@@ -17,6 +17,8 @@ TeamName = []
 ids = soup.find_all("constructor")
 names = soup.find_all('name')
 
+
+
 for name in names:
     TeamName.append(name.text)
 dict['name'] = TeamName
