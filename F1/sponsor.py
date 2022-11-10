@@ -2,29 +2,38 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import os
-import team_id
 
-url2 = 'https://en.wikipedia.org/wiki/Formula_One_sponsorship_liveries'
-sponsor_page = requests.get(url2)
+def sponsors(constructor):
+    '''
+    INPUTS
+    constructor: (String) team code of the constructor we want to examine
 
-soup2 = BeautifulSoup(sponsor_page.content, 'html.parser')
+    OUTPUTS
+    df: dataframe of the sponsors of the livery sponsors of that team seperated
+    by year
+    '''
 
-constructor = 'Force_India'
+    url2 = 'https://en.wikipedia.org/wiki/Formula_One_sponsorship_liveries'
+    sponsor_page = requests.get(url2)
 
-team = soup2.find(id = constructor)
+    soup2 = BeautifulSoup(sponsor_page.content, 'html.parser')
 
-header = team.parent
+    constructor = 'Force_India'
 
-table = header.find_next_sibling('table')
+    team = soup2.find(id = constructor)
 
-df = pd.read_html(str(table))
-df = pd.concat(df)
+    header = team.parent
 
-df['Year'] = df['Year'].replace({"\[(.*?)\]":""}, regex=True).astype('string')
-df["Main colour(s)"] = df["Main colour(s)"].astype('string')
-df['Additional colour(s)'] = df["Additional colour(s)"].astype('string')
-df["Livery sponsor(s)"] = df["Livery sponsor(s)"].astype('string')
-df["Additional major sponsor(s)"] = df["Additional major sponsor(s)"].astype('string')
-df.set_index('Year', inplace = True)
+    table = header.find_next_sibling('table')
 
-print(df.loc['2008'])
+    df = pd.read_html(str(table))
+    df = pd.concat(df)
+
+    df['Year'] = df['Year'].replace({"\[(.*?)\]":""}, regex=True).astype('string')
+    df["Main colour(s)"] = df["Main colour(s)"].astype('string')
+    df['Additional colour(s)'] = df["Additional colour(s)"].astype('string')
+    df["Livery sponsor(s)"] = df["Livery sponsor(s)"].astype('string')
+    df["Additional major sponsor(s)"] = df["Additional major sponsor(s)"].astype('string')
+    df.set_index('Year', inplace = True)
+
+    return df
