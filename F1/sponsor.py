@@ -18,8 +18,6 @@ def sponsors(constructor):
 
     soup2 = BeautifulSoup(sponsor_page.content, 'html.parser')
 
-    constructor = 'Force_India'
-
     team = soup2.find(id = constructor)
 
     header = team.parent
@@ -30,10 +28,10 @@ def sponsors(constructor):
     df = pd.concat(df)
 
     df['Year'] = df['Year'].replace({"\[(.*?)\]":""}, regex=True).astype('string')
-    df["Main colour(s)"] = df["Main colour(s)"].astype('string')
-    df['Additional colour(s)'] = df["Additional colour(s)"].astype('string')
     df["Livery sponsor(s)"] = df["Livery sponsor(s)"].astype('string')
     df["Additional major sponsor(s)"] = df["Additional major sponsor(s)"].astype('string')
     df.set_index('Year', inplace = True)
+    df.drop("Main colour(s)", axis = 1, inplace = True)
+    df.drop('Additional colour(s)', axis = 1, inplace = True)
 
     return df

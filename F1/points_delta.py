@@ -56,3 +56,5 @@ def constructor_points(year, team):
     df = pd.DataFrame(points_dict, index = round_lst)
 
     return df
+
+print(constructor_points('2010', 'force_india'))
