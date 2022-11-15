@@ -54,7 +54,6 @@ def constructor_points(year, team):
     points_dict['date'] = dates_lst
 
     df = pd.DataFrame(points_dict, index = round_lst)
+    df['date'] = df['date'].astype('datetime64[ns]')
 
     return df
-
-print(constructor_points('2010', 'force_india'))
